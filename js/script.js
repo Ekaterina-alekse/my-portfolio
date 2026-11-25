@@ -1,8 +1,3 @@
-/* ============================================================
-   Скрипты визитки Kolbina Ekaterina
-   Простые эффекты без библиотек
-   ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
   initBurgerMenu();
   initHeaderShadow();
@@ -14,26 +9,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ------------------------------------------------------------
-   1. Бургер-меню (мобильная навигация)
+   1. Бургер-меню
    ------------------------------------------------------------ */
 function initBurgerMenu() {
   const burger = document.getElementById('burger');
   const nav = document.getElementById('nav');
   if (!burger || !nav) return;
 
+  const closeMenu = () => {
+    nav.classList.remove('is-open');
+    burger.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+  };
+
   burger.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('nav--open');
-    burger.classList.toggle('burger--open', isOpen);
+    const isOpen = nav.classList.toggle('is-open');
+    burger.classList.toggle('is-open', isOpen);
     burger.setAttribute('aria-expanded', String(isOpen));
   });
 
-  // Закрываем меню после клика по пункту
   nav.querySelectorAll('.nav__link').forEach((link) => {
     link.addEventListener('click', () => {
-      nav.classList.remove('nav--open');
-      burger.classList.remove('burger--open');
-      burger.setAttribute('aria-expanded', 'false');
+      closeMenu();
+      link.blur();
     });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (nav.classList.contains('is-open') &&
+      !nav.contains(event.target) &&
+      !burger.contains(event.target)) {
+      closeMenu();
+    }
   });
 }
 
@@ -53,13 +60,12 @@ function initHeaderShadow() {
 }
 
 /* ------------------------------------------------------------
-   3. Плавное появление секций при скролле (IntersectionObserver)
+   3. Плавное появление секций при скролле
    ------------------------------------------------------------ */
 function initRevealOnScroll() {
   const items = document.querySelectorAll('.reveal');
   if (!items.length) return;
 
-  // Если браузер не поддерживает IntersectionObserver — просто показать всё
   if (!('IntersectionObserver' in window)) {
     items.forEach((el) => el.classList.add('is-visible'));
     return;
@@ -70,7 +76,7 @@ function initRevealOnScroll() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); // анимируем один раз
+          observer.unobserve(entry.target);
         }
       });
     },
@@ -84,29 +90,30 @@ function initRevealOnScroll() {
    4. Подсветка активного пункта меню при прокрутке
    ------------------------------------------------------------ */
 function initActiveNavHighlight() {
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav__link');
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const links = Array.from(document.querySelectorAll('.nav__link'));
   if (!sections.length || !links.length) return;
 
   const setActive = () => {
-    const scrollPos = window.scrollY + 120;
+    const offset = 140;
+    let currentId = sections[0].id;
 
     sections.forEach((section) => {
-      const top = section.offsetTop;
-      const bottom = top + section.offsetHeight;
-
-      if (scrollPos >= top && scrollPos < bottom) {
-        links.forEach((link) => {
-          link.classList.toggle(
-            'nav__link--active',
-            link.getAttribute('href') === '#' + section.id
-          );
-        });
+      if (window.scrollY + offset >= section.offsetTop) {
+        currentId = section.id;
       }
+    });
+
+    links.forEach((link) => {
+      link.classList.toggle(
+        'is-active',
+        link.getAttribute('href') === `#${currentId}`
+      );
     });
   };
 
   window.addEventListener('scroll', setActive, { passive: true });
+  window.addEventListener('resize', setActive);
   setActive();
 }
 
@@ -121,13 +128,11 @@ function initTypingEffect() {
   const fullText = 'Frontend Developer (in training)';
   let charIndex = 0;
 
-  // Оставляем только курсор, текст напечатаем сами
   subtitle.textContent = '';
   if (cursor) subtitle.appendChild(cursor);
 
   const tick = () => {
     charIndex += 1;
-    // Вставляем текст перед курсором
     if (cursor) {
       cursor.insertAdjacentText('beforebegin', fullText[charIndex - 1]);
     } else {
@@ -143,11 +148,13 @@ function initTypingEffect() {
 }
 
 /* ------------------------------------------------------------
-   6. Валидация формы контактов
+   6. Валидация и отправка формы (Formspree, без перезагрузки)
    ------------------------------------------------------------ */
 function initFormValidation() {
   const form = document.getElementById('contactForm');
   if (!form) return;
+
+  const successEl = document.getElementById('formSuccess');
 
   const showError = (field, message) => {
     const errorEl = form.querySelector(`[data-error-for="${field.name}"]`);
@@ -161,14 +168,14 @@ function initFormValidation() {
     field.classList.remove('is-invalid');
   };
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
     const name = form.elements.name;
     const email = form.elements.email;
     const message = form.elements.message;
     let isValid = true;
 
-    // Проверка имени
     if (name.value.trim().length < 2) {
       showError(name, '// ошибка: имя слишком короткое');
       isValid = false;
@@ -176,7 +183,6 @@ function initFormValidation() {
       clearError(name);
     }
 
-    // Проверка Email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value.trim())) {
       showError(email, '// ошибка: проверьте email');
@@ -185,7 +191,6 @@ function initFormValidation() {
       clearError(email);
     }
 
-    // Проверка сообщения
     if (message.value.trim().length < 10) {
       showError(message, '// ошибка: напишите чуть подробнее');
       isValid = false;
@@ -193,13 +198,32 @@ function initFormValidation() {
       clearError(message);
     }
 
-    if (!isValid) {
-      event.preventDefault();
-      return;
+    if (!isValid) return;
+
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!response.ok) throw new Error('Ошибка отправки');
+
+      form.reset();
+      if (successEl) {
+        successEl.hidden = false;
+        setTimeout(() => { successEl.hidden = true; }, 5000);
+      }
+    } catch {
+      showError(message, '// ошибка: не удалось отправить, попробуйте позже');
+    } finally {
+      button.disabled = false;
     }
   });
 }
-
 
 /* ------------------------------------------------------------
    7. Актуальный год в футере

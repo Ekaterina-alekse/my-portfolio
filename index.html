@@ -13,6 +13,14 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="./style/style.css" />
+  <noscript>
+    <style>
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </noscript>
 </head>
 
 <body>
@@ -30,7 +38,7 @@
         </ul>
       </nav>
 
-      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -164,7 +172,7 @@
                 <span class="badge">layout</span>
               </div>
               <h3 class="project-card__title">Sedona Landing Page</h3>
-              <p class="project-card__desc">Вёрстка проекта «Седона» в стиле pixel‑perfect: точное соответствие макету.
+              <p class="project-card__desc">Вёрстка проекта «Седона» в стиле pixel-perfect: точное соответствие макету.
                 Реализованы две страницы — главная и каталог. Семантичная разметка, CSS Flexbox и Grid, фиксированные
                 размеры и отступы по макету.</p>
               <div class="project-card__stack">
@@ -174,8 +182,10 @@
                 <span class="badge">Grid</span>
               </div>
               <div class="project-card__links">
-                <a href="https://github.com/Ekaterina-alekse/Sedona" class="project-card__link">GitHub ↗</a>
-                <a href="https://ekaterina-alekse.github.io/Sedona/" class="project-card__link">Live ↗</a>
+                <a href="https://github.com/Ekaterina-alekse/Sedona" target="_blank" rel="noopener noreferrer"
+                  class="project-card__link">GitHub ↗</a>
+                <a href="https://ekaterina-alekse.github.io/Sedona/" target="_blank" rel="noopener noreferrer"
+                  class="project-card__link">Live ↗</a>
               </div>
             </div>
           </article>
@@ -199,10 +209,10 @@
                 <span class="badge">JS</span>
               </div>
               <div class="project-card__links">
-                <a href="https://github.com/Ekaterina-alekse/article-preview-component"
-                  class="project-card__link">GitHub ↗</a>
-                <a href="https://ekaterina-alekse.github.io/article-preview-component/" class="project-card__link">Live
-                  ↗</a>
+                <a href="https://github.com/Ekaterina-alekse/article-preview-component" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">GitHub ↗</a>
+                <a href="https://ekaterina-alekse.github.io/article-preview-component/" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">Live ↗</a>
               </div>
             </div>
           </article>
@@ -225,10 +235,10 @@
                 <span class="badge">Flex</span>
               </div>
               <div class="project-card__links">
-                <a href="https://github.com/Ekaterina-alekse/testimonials-grid-section"
-                  class="project-card__link">GitHub ↗</a>
-                <a href="https://ekaterina-alekse.github.io/testimonials-grid-section/
-" class="project-card__link">Live ↗</a>
+                <a href="https://github.com/Ekaterina-alekse/testimonials-grid-section" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">GitHub ↗</a>
+                <a href="https://ekaterina-alekse.github.io/testimonials-grid-section/" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">Live ↗</a>
               </div>
             </div>
           </article>
@@ -251,10 +261,10 @@
                 <span class="badge">Flex</span>
               </div>
               <div class="project-card__links">
-                <a href="https://github.com/Ekaterina-alekse/four-card-feature-section"
-                  class="project-card__link">GitHub ↗</a>
-                <a href="https://ekaterina-alekse.github.io/four-card-feature-section/
-" class="project-card__link">Live ↗</a>
+                <a href="https://github.com/Ekaterina-alekse/four-card-feature-section" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">GitHub ↗</a>
+                <a href="https://ekaterina-alekse.github.io/four-card-feature-section/" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">Live ↗</a>
               </div>
             </div>
           </article>
@@ -269,18 +279,19 @@
               </div>
               <h3 class="project-card__title">Recipe Landing Page</h3>
               <p class="project-card__desc">
-              <p class="project-card__desc">
                 Лендинг рецепта с продуманной типографикой и удобной структурой для чтения на мобильных устройствах.
-                Адаптивная вёрстка,
-                семантические теги, понятная иерархия заголовков и акцентные элементы для ключевых частей рецепта.
+                Адаптивная вёрстка, семантические теги, понятная иерархия заголовков и акцентные элементы для ключевых
+                частей рецепта.
               </p>
               <div class="project-card__stack">
                 <span class="badge">HTML</span>
                 <span class="badge">CSS</span>
               </div>
               <div class="project-card__links">
-                <a href="https://github.com/Ekaterina-alekse/recipe-page" class="project-card__link">GitHub ↗</a>
-                <a href="https://ekaterina-alekse.github.io/recipe-page/" class="project-card__link">Live ↗</a>
+                <a href="https://github.com/Ekaterina-alekse/recipe-page" target="_blank" rel="noopener noreferrer"
+                  class="project-card__link">GitHub ↗</a>
+                <a href="https://ekaterina-alekse.github.io/recipe-page/" target="_blank" rel="noopener noreferrer"
+                  class="project-card__link">Live ↗</a>
               </div>
             </div>
           </article>
@@ -303,17 +314,18 @@
                 <span class="badge">CSS</span>
               </div>
               <div class="project-card__links">
-                <a href="https://github.com/Ekaterina-alekse/social-links-profile-main"
-                  class="project-card__link">GitHub ↗</a>
-                <a href="https://ekaterina-alekse.github.io/social-links-profile-main/" class="project-card__link">Live
-                  ↗</a>
+                <a href="https://github.com/Ekaterina-alekse/social-links-profile-main" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">GitHub ↗</a>
+                <a href="https://ekaterina-alekse.github.io/social-links-profile-main/" target="_blank"
+                  rel="noopener noreferrer" class="project-card__link">Live ↗</a>
               </div>
             </div>
           </article>
         </div>
 
         <p class="projects-all">
-          <a href="https://github.com/Ekaterina-alekse" class="projects-all__link">Смотреть все работы на GitHub ↗</a>
+          <a href="https://github.com/Ekaterina-alekse?tab=repositories" target="_blank" rel="noopener noreferrer"
+            class="projects-all__link">Смотреть все работы на GitHub ↗</a>
         </p>
       </div>
     </section>
@@ -356,7 +368,7 @@
 
               <button type="submit" class="btn btn--primary btn--full">Отправить</button>
               <p class="form-success" id="formSuccess" hidden>
-                <span class="terminal-prompt">$</span> сообщение отправлено ✓ (это демо)
+                <span class="terminal-prompt">$</span> сообщение отправлено ✓
               </p>
             </div>
           </form>
@@ -371,12 +383,12 @@
             <p class="contacts__cmd"><span class="terminal-prompt">$</span> contact --fast</p>
 
             <ul class="contacts__list">
-              <li><a href="https://max.ru/u/f9LHodD0cOJv5zjYWMio-N4UMTKpaPhYPAJq5fqflmp6Y2fpGRt7ekv6xF0"
-                  class="contacts__link">→ Max</a></li>
+              <li><a href="https://max.ru/u/f9LHodD0cOJv5zjYWMio-N4UMTKpaPhYPAJq5fqflmp6Y2fpGRt7ekv6xF0" target="_blank"
+                  rel="noopener noreferrer" class="contacts__link">→ Max</a></li>
               <li><a href="mailto:ekaterina.alekse@yandex.ru" class="contacts__link">→ ekaterina.alekse@yandex.ru</a>
               </li>
-              <li><a href="https://github.com/Ekaterina-alekse" class="contacts__link">→ github.com/Ekaterina-alekse</a>
-              </li>
+              <li><a href="https://github.com/Ekaterina-alekse" target="_blank" rel="noopener noreferrer"
+                  class="contacts__link">→ github.com/Ekaterina-alekse</a></li>
             </ul>
 
             <p class="contacts__response-time">
@@ -400,7 +412,7 @@
     </div>
   </footer>
 
-  <script src="./js/script.js"></script>
+  <script src="./js/script.js" defer></script>
 </body>
 
 </html>
